@@ -1,6 +1,6 @@
 my:
   server:
-    addr: localhost
+    addr: 192.168.56.101
   level:
     cn.tedu.mall: trace
 spring:

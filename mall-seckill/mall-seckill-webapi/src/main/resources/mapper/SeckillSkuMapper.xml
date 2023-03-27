@@ -13,7 +13,39 @@
         <result column="gmt_modified" property="gmtModified" />
         <result column="seckill_limit" property="seckillLimit" />
     </resultMap>
+    <sql id="SimpleField">
+        <if test="true">
+            id,
+            sku_id,
+            spu_id,
+            seckill_stock,
+            seckill_price,
+            gmt_create,
+            gmt_modified,
+            seckill_limit
+        </if>
+    </sql>
+    
+    <select id="findSeckillSkusBySpuId" resultMap="BaseResultMap">
+        select
+            <include refid="SimpleField"/>
+        from
+          seckill_sku
+        where
+        spu_id = #{spuId}
+    </select>
 
-
-
+    <select id="findSeckillSpusByTime" resultType="BaseResultMap">
+        select
+        <include refid="SimpleField"/>
+        from
+        seckill_spu
+        where
+        start_time &lt; #{time}
+        and
+        end_time &gt; #{time}
+    </select>
+    <update id="updateReduceStockBySkuId">
+        update seckill_sku set seckill_stuck = seckill_stuck - #{quantity} where sku_id = #{skuId};
+    </update>
 </mapper>

@@ -8,7 +8,7 @@
 my:
   server:
     #addr: 106.175.107.221
-    addr: localhost
+    addr: 192.168.56.101
 # 日志显示级别
 logging:
   level:

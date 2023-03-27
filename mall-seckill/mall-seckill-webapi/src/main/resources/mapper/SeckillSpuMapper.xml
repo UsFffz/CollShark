@@ -12,7 +12,43 @@
         <result column="gmt_modified" property="gmtModified" />
     </resultMap>
     <!--  查询秒杀spu的sql片段  -->
+    <sql id="SimpleField">
+        <if test="true">
+            id,
+            spu_id,
+            list_price,
+            start_time,
+            end_time,
+            gmt_create,
+            gmt_modified,
+        </if>
+    </sql>
+    
+    <select id="findSeckillSkusBySpuId" resultMap="BaseResultMap">
+      select
+          <include refid="SimpleField"/>
+        from
+          seckill_spu
+      where
+        spu_id = #{spuId}
+    </select>
 
 
 
+    <select id="findSeckillSpuById" resultType="BaseResultMap">
+        select
+            <include refid="SimpleField"/>
+        from
+        seckill_spu
+        where
+          spu_id = #{spuId}
+    </select>
+
+     <!--    布隆过滤器 所用 查询所有spuid-->
+    <select id="findAllSeckillSpuIds" resultType="long">
+        select
+            spu_id
+        from
+            seckill_spu;
+    </select>
 </mapper>

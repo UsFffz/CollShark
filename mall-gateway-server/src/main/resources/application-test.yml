@@ -1,6 +1,6 @@
 my:
   server:
-    addr: localhost
+    addr: 192.168.56.101
     #addr: 106.75.107.22
 spring:
   application:
